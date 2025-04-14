@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import Square from "./Square";
 
 //승자 계산
@@ -26,7 +25,7 @@ const calculateWinner = (squares) => {
 
 const Board = ({ xIsNext, squares, onPlay }) => {
   //현재 값
-  const [value, setValue] = useState("X");
+  //const [value, setValue] = useState("X");
   //현재 들어간 값 배열
   //const [squares, setSquares] = useState(Array(9).fill(null));
 
@@ -35,16 +34,16 @@ const Board = ({ xIsNext, squares, onPlay }) => {
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = "Next player: " + value;
+    status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
   //클릭 이벤트 함수
   const handleClick = (idx) => {
     if (squares[idx] || calculateWinner(squares)) return;
     const arr = squares.slice();
-    arr[idx] = value;
+    arr[idx] = xIsNext ? "X" : "O";
     onPlay(arr);
-    value === "X" ? setValue("O") : setValue("X");
+    //value === "X" ? setValue("O") : setValue("X");
   };
 
   return (
